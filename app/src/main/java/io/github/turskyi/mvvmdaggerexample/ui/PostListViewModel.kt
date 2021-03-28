@@ -1,5 +1,7 @@
 package io.github.turskyi.mvvmdaggerexample.ui
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.View.GONE
@@ -15,6 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+
 
 //TODO: 8
 class PostListViewModel(private val dao: PostDao) : BaseViewModel() {
@@ -37,14 +40,14 @@ class PostListViewModel(private val dao: PostDao) : BaseViewModel() {
         subscription = Observable.fromCallable {
             dao.all
         }
-                /* we made a thread for a task above */
+            /* we made a thread for a task above */
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
-                /*start*/
+            /*start*/
             .concatMap { postDbList ->
-                if (postDbList.isEmpty()){
+                if (postDbList.isEmpty()) {
                     /*download from api*/
-                    postApi.getPosts().concatMap {postApiList ->
+                    postApi.getPosts().concatMap { postApiList ->
                         /*add to db*/
                         dao.insertAll(*postApiList.toTypedArray())
                         /*add to observable to show in main activity*/
@@ -57,11 +60,11 @@ class PostListViewModel(private val dao: PostDao) : BaseViewModel() {
                     Observable.just(postDbList)
                 }
             }
-                /*stop*/
+            /*stop*/
             .doOnSubscribe { onRetrievePostListStart() }
             .doOnTerminate { onRetrievePostListFinish() }
             .subscribe(
-                {posts-> onRetrievePostListSuccess(posts) },
+                { posts -> onRetrievePostListSuccess(posts) },
                 {
                     onRetrievePostListError(it)
                 }
@@ -80,7 +83,10 @@ class PostListViewModel(private val dao: PostDao) : BaseViewModel() {
 
     private fun onRetrievePostListSuccess(posts: List<Post>) {
         Log.d("PostListViewModel", "onRetrievePostListSuccess")
-        adapter.updatePostList(posts)
+        val handler = Handler(Looper.getMainLooper())
+        handler.post {
+            adapter.updatePostList(posts)
+        }
     }
 
     private fun onRetrievePostListError(throwable: Throwable) {
