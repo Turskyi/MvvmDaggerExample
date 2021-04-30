@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvPostList.setHasFixedSize(true)
         binding.viewModel = viewModel
-        viewModel.errorMessage.observe(this, Observer { message ->
+        viewModel.errorMessage.observe(this, { message ->
             if (message != null) {
                 showError(message)
             } else {

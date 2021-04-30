@@ -18,7 +18,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-
 //TODO: 8
 class PostListViewModel(private val dao: PostDao) : BaseViewModel() {
 

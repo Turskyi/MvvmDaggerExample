@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -39,38 +38,38 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    /* constraintlayout */
+    // constraintlayout
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
-    /* RecyclerView */
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    // RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
-    /* Snackbar */
+    // for Snackbar
     implementation 'com.google.android.material:material:1.3.0'
 
-    /* Dagger */
+    // Dagger
     implementation 'com.google.dagger:dagger:2.31'
     kapt 'com.google.dagger:dagger-compiler:2.28.3'
 
-    /* ViewModel */
+    // for ViewModel
     implementation "android.arch.lifecycle:extensions:1.1.1"
 
-    /* Retrofit */
+    // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
 
-    /* Retrofit json converter */
+    // Retrofit json converter
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
 
-    /* RxJava */
+    // RxJava
     implementation "io.reactivex.rxjava2:rxjava:2.2.15"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
-    /* Room */
-    implementation "androidx.room:room-runtime:2.2.6"
-    kapt "androidx.room:room-compiler:2.2.6"
+    // Room
+    implementation "androidx.room:room-runtime:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
 
-    /* test */
+    // test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
